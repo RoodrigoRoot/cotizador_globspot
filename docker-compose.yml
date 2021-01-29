@@ -1,0 +1,21 @@
+version: "3"
+
+services: 
+  db:
+    image: postgres:12
+    env_file: .env
+    container_name: db
+
+  cotizador:
+    build: 
+      context: .
+    env_file: .env
+    container_name: cotizador
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/cotizador
+    ports: 
+      - "8000:8000"
+    depends_on: 
+      - db
+  
