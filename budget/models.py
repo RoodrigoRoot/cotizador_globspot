@@ -5,7 +5,7 @@ from accounts.models import Company
 
 class Budget(models.Model):
     company = models.ForeignKey(Company, verbose_name="Compañia", on_delete=models.CASCADE)
-    company_contact = models.CharField(verbose_name="Compañia", max_length=150)
+    company_contact = models.CharField(verbose_name="Contacto", max_length=150)
     vehicles = models.IntegerField(verbose_name="Vehículos")
     people = models.IntegerField(verbose_name="Personas")
     truck = models.IntegerField(verbose_name="Camiones")
@@ -15,10 +15,8 @@ class Budget(models.Model):
     updated_at = models.DateTimeField(verbose_name="Modificación", auto_now=True, auto_now_add=False)
 
     def __str__(self):
-        return self.company
+        return self.company_contact
     
-    def __repr__(self):
-        return self.company
     
     class Meta:
         verbose_name = "Presupuesto"
