@@ -1,29 +1,49 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Cotizador</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Registros</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Mi Cuenta
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Cambiar Contraseña</a></li>
-            </ul>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <a href="{% url 'logout' %}" class="btn btn-outline-danger" type="submit">Salir</a>
-        </form>
-      </div>
+{% load static %}
+
+
+<div class="wrapper">
+
+<nav class="main-header navbar navbar-expand-md navbar-light navbar-white">
+  <div class="container">
+    <a href="#" class="navbar-brand">
+      <img src="{% static 'logos/logo.jpg' %}" alt="AdminLTE Logo" class="brand-image"
+           style="opacity: .8">
+    </a>
+    
+    <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="index3.html" class="nav-link">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">Compañias</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Mi cuenta</a>
+          <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
+            <li><a href="#" class="dropdown-item">Cambiar Contraseña</a></li>
+            <li><a href="#" class="dropdown-item">Mis datos</a></li>
+
+            <li class="dropdown-divider"></li>
+
+          </ul>
+        </li>
+      </ul>
+
     </div>
-  </nav>
+
+    <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+      <!-- Messages Dropdown Menu -->
+      <li class="nav-item dropdown">
+        <a href="{% url 'logout' %}" class="btn btn-outline-danger" type="submit">Salir</a>
+
+      </li>
+    </ul>
+  </div>
+</nav>
+</div>
