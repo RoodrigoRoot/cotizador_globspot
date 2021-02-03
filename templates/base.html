@@ -5,8 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'boostrap/css/bootstrap.css' %}">
+    {% block css %} 
+    {% endblock %}
     <title>{% block title %}{% endblock %}</title>
 </head>
+{% block style %} 
+{% endblock %}
+
 <body>
 {% if request.user.is_authenticated %}
     {% include "navbar.html" %}

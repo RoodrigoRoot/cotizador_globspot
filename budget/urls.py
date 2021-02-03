@@ -1,7 +1,8 @@
 from django.urls import  path
-from .views import IndexView, logout_view
+from .views import IndexView
+from django.contrib.auth.decorators import login_required
 
 urlpatterns = [
-    path("", IndexView.as_view(), name="index"),
-    path("salir/", logout_view, name="logout"),
+    path("", login_required(IndexView.as_view()), name="index"),
+
 ]

@@ -1,6 +1,40 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Entrar{% endblock %}
 
+{% block css %} 
+    <link rel="stylesheet" href="{% static 'css/login/index.css' %}">
+{% endblock %}
+
+{% block style %}
+    <style>
+        body{
+            background-image: url("{% static 'img/login/entrar.jpg' %}");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: #fff;
+            
+
+        }
+        form{
+            height: 450px;
+            display: flex;
+            flex-direction:column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+{% endblock %}
+
 {% block content%}
+<div class="container-fluid text-center">
+<h2>¡Bienvenido!</h2>
+</div>
+<form method="POST" class="text-center">{% csrf_token %}
+{{form.as_p}}
+<input class="btn btn-success" type="submit" value="Entrar">
+</form>
+
 {% endblock %}
