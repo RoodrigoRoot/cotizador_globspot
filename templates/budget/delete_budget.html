@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} 
+Eliminar {{object.company}}
+{%endblock%}
+
+{% block content %}
+<div class="container">
+    <div>
+        <h2>¿Deseas eliminar la cotización de {{object.company}}?</h2>
+        <form method="post" action="{% url 'delete_budget' object.pk %}">
+            {% csrf_token %} 
+            <input class="btn btn-danger" type="submit" value="Si, Eliminar">
+            <a href="{% url 'index' %}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+    
+
+</div>
+{% endblock %}

@@ -4,7 +4,7 @@
 
   {% block content %} 
   <div class="container">
-    <form id="budget_form" method="post" action="{% url 'add_budget' %}" accept-charset="utf-8">
+    <form id="update_budget_form" method="post" action="{% url 'update_budget' object.pk %}" accept-charset="utf-8">
             {% csrf_token %}
             <fieldset>
               <legend>Cliente</legend>
@@ -74,7 +74,7 @@
 
   $('#id_company').select2({ width: '100%' });
 
-  $("#budget_form").on('submit', function(e){
+  $("#update_budget_form").on('submit', function(e){
     e.preventDefault();
     data = $('form').serialize()
     $.ajax({
@@ -84,8 +84,8 @@
       success: function (xhr, ajaxOptions, thrownError) {
         if (xhr.pk){
             Swal.fire(
-          '¡Guardado',
-          `Puedes descargar tu PDF en este enlace:${xhr.pk}`,
+          'Actualizado',
+          'En un momento aparecerá tu PDF',
           'success'
           ) 
           
