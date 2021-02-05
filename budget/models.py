@@ -13,6 +13,9 @@ class Budget(models.Model):
     motorcycles = models.IntegerField(verbose_name="Camiones", null=True, blank=True, default=0)
     pets = models.IntegerField(verbose_name="Mascotas", null=True, blank=True, default=0)
     creator = models.ForeignKey(User, verbose_name="Autor", on_delete=models.CASCADE)
+    quantity = models.SmallIntegerField(default=0)
+    unit_cost = models.SmallIntegerField(default=0)
+    total = models.IntegerField(verbose_name="Total", default=0)
     created_at = models.DateTimeField(verbose_name="Creación", auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="Modificación", auto_now=True, auto_now_add=False)
 
@@ -24,5 +27,12 @@ class Budget(models.Model):
         verbose_name = "Presupuesto"
         verbose_name_plural = "Presupuestos"
 
+class Prices(models.Model):
 
+    name = models.CharField(verbose_name="Rango", max_length=50)
+    price = models.SmallIntegerField()
+    value = models.SmallIntegerField()
 
+    def __str__(self):
+        return self.name
+    

@@ -5,7 +5,7 @@ from django.db import models
 class Company(models.Model):
 
     name = models.CharField(verbose_name="Compañia", max_length=150)
-    description = models.TextField(verbose_name="Descripción")
+    description = models.TextField(verbose_name="Descripción", blank=True, null=True)
 
     def __str__(self):
         return self.name

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Budget
+from .models import Budget, Prices
 
 # Register your models here.
 
@@ -9,3 +9,10 @@ class BudgeAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Budget, BudgeAdmin)
+
+class PricesAdmin(admin.ModelAdmin):
+    list_display = ["name", "price"]
+    
+
+
+admin.site.register(Prices, PricesAdmin)
