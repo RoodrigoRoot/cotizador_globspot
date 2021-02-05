@@ -11,6 +11,7 @@ class CompanyModelForm(forms.ModelForm):
         'class':'form-control',
         'rows':3
     }))
+    
     class Meta:
         model = Company
         fields = ("name", "description")

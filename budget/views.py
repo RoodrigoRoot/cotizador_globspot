@@ -71,11 +71,11 @@ class BudgetUpdateView(UpdateView, LoginRequiredMixin):
         quantity = 0
         json3 = {}
         try:
-            form = BudgetModelForm(request.POST)
+            self.object = self.get_object()
+            form = BudgetModelForm(request.POST, instance=self.object)
             if form.is_valid():
-                self.object = self.get_object()
-                print(self.object.pk)
-                #budget_upd = form.save(commit=False)
+                
+                budget_upd = form.save(commit=False)
                 
                 quantity += int(request.POST.get("vehicles"))
                 quantity += int(request.POST.get("trucks"))
@@ -85,25 +85,17 @@ class BudgetUpdateView(UpdateView, LoginRequiredMixin):
                 quantity += int(request.POST.get("motorcycles"))
                 price, total = get_quantity(quantity)
 
-                
-                self.object.company_id=request.POST.get('company')
-                self.object.company_contact=request.POST.get("company_contact")
-                self.object.vehicles=request.POST.get("vehicles")
-                self.object.trucks=request.POST.get("trucks")
-                self.object.pets=request.POST.get("pets")
-                self.object.people=request.POST.get("people")
-                self.object.containers=request.POST.get("containers")
-                self.object.motorcycles=request.POST.get("motorcycles")
-                self.object.quantity=quantity
-                self.object.unit_cost=price
-                self.object.creator=request.user
-                self.object.total=total
+                budget_upd.quantity=quantity
+                budget_upd.unit_cost=price
+                budget_upd.creator=request.user
+                budget_upd.total=total
 
-                self.object.save()
+                budget_upd.save()
             
-                json3 = {"pk":self.object.pk}
+                json3 = {"pk":budget_upd.pk}
 
         except  Exception as e:
+            json3 = {"error":"KO"}
             print(e)
         return JsonResponse(json3, safe=False)
 

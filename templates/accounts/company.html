@@ -45,11 +45,11 @@
       success: function (xhr, ajaxOptions, thrownError) {
         console.log(xhr)
         if (xhr.pk){
-            Swal.fire({
-          title:'¡Guardado',
-          type:'success',
-          text:'Se ha creado la compañia.'
-            }) 
+            Swal.fire(
+          '¡Guardado',
+          'success',
+          'Se ha creado la compañia.'
+            ) 
             .then(function (result) {
               console.log(result)
               if (result.isConfirmed) {
