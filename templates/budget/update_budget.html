@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %}Nueva Cotización{% endblock %}
+{% block title %}Globspot | Modificar Cotización{% endblock %}
 
 
   {% block content %} 
@@ -57,7 +57,7 @@
           <div id="files"></div>
         </div>
         <div class="modal-footer" style="background-color: #F7F7F9;">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+          <a href="{% url 'index' %}" class="btn btn-danger" >Cancelar</a>
           <input type="submit" class="btn btn-primary" value="Guardar">
         </div>
       </form>
@@ -79,7 +79,7 @@
     data = $('form').serialize()
     $.ajax({
       type:"POST",
-      url: "{% url 'add_budget' %}",
+      url: "{% url 'update_budget' object.pk %}",
       data:data,
       success: function (xhr, ajaxOptions, thrownError) {
         if (xhr.pk){
@@ -88,9 +88,7 @@
           'En un momento aparecerá tu PDF',
           'success'
           ) 
-          
-          $("p").append(" <b>Appended text</b>.");
-          $("p").append(" <b>Appended text</b>.");
+
         }
       },      
       error: function (xhr, ajaxOptions, thrownError) {

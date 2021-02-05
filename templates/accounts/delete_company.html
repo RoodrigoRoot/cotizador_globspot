@@ -2,17 +2,17 @@
 {% load static %}
 
 {% block title %} 
-Globspot | Eliminar {{object.company}}
+Globspot | Eliminar {{object.name}}
 {%endblock%}
 
 {% block content %}
 <div class="container">
     <div>
-        <h2>¿Deseas eliminar la cotización de {{object.company}}?</h2>
-        <form method="post" action="{% url 'delete_budget' object.pk %}">
+        <h2>¿Deseas eliminar la Empresa {{object.name}}?</h2>
+        <form method="post" action="{% url 'delete_companies' object.pk %}">
             {% csrf_token %} 
             <input class="btn btn-danger" type="submit" value="Si, Eliminar">
-            <a href="{% url 'index' %}" class="btn btn-secondary">Cancelar</a>
+            <a href="{% url 'companies' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
     

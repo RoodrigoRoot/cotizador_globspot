@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block title %}Globspot | Compañias{%endblock%}
+
+{% block content %}
+<div class="content-wrapper">
+    <div class="container">
+    <h1 class="pt-1"><i class="fas fa-building"></i> Compañías</h1>
+      <div class="card mt-5">
+      <div class="card-header">
+        <a  class="btn btn-primary" href="{% url 'add_companies' %}">
+          <i class="fas fa-plus"></i> Nueva
+        </a>
+      </div>
+      <div class="card-body">
+          <table id="data" class="table table-bordered table-hover dataTable dtr-inline">
+            <thead>
+              <tr>
+                <th scope="col">Compañía</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for company in object_list %}
+              <tr>
+                <td>{{company.name}}</td>
+                <td>{{company.description}}</td>
+                <td class="text-center">
+                    <a href="{% url 'update_companies' company.pk %}"  data-toggle="tooltip" data-bs-placement="top" title="Actualizar"><i class="fas fa-pen" style="color:#F0AD4E;"></i></a>
+                    <a href="{% url 'delete_companies' company.pk %}"  data-toggle="tooltip" data-bs-placement="top" title="Eliminar"><i class="fas fa-trash-alt" style="color:red;"></i></a>
+                    
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+            
+          </table>
+      </div>
+      </div>
+    </div>
+    </div>
+{% endblock %}
