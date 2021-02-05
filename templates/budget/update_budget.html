@@ -79,7 +79,7 @@
     data = $('form').serialize()
     $.ajax({
       type:"POST",
-      url: "{% url 'update_budget' object.pk %}",
+      url: "{% url 'add_budget'  %}",
       data:data,
       success: function (xhr, ajaxOptions, thrownError) {
         if (xhr.pk){
@@ -87,7 +87,13 @@
           'Actualizado',
           'En un momento aparecerá tu PDF',
           'success'
-          ) 
+          )
+          .then(function (result) {
+            console.log(result)
+            if (result.isConfirmed) {
+                window.location = "{% url 'index' %}";
+            }
+        })
 
         }
       },      
@@ -100,6 +106,48 @@
     })
     
 
+
+
+
+    $("#budget_form").on('submit', function(e){
+      e.preventDefault();
+      data = $('form').serialize()
+      $.ajax({
+        type:"POST",
+        url: "{% url 'add_budget' %}",
+        data:data,
+        success: function (xhr, ajaxOptions, thrownError) {
+          console.log(xhr)
+          if (xhr.pk){
+              Swal.fire({
+            title:'¡Guardado',
+            type:'success',
+            text:'Se ha creado la cotización.'
+              }) 
+              .then(function (result) {
+                console.log(result)
+                if (result.isConfirmed) {
+                    window.location = "{% url 'index' %}";
+                }
+            })
+  
+            
+            
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: '¡Intentelo más tarde!'
+            })
+          }
+        },      
+        error: function (xhr, ajaxOptions, thrownError) {
+          
+        }
+  
+        })
+  
+      })
 
 </script>
 {% endblock %}

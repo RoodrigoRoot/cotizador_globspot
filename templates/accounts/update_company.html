@@ -4,7 +4,7 @@
 
   {% block content %} 
   <div class="container">
-    <form method="post" action="{% url 'update_companies' object.pk %}" accept-charset="utf-8">
+    <form id="update_company_form" method="post" action="{% url 'update_companies' object.pk %}" accept-charset="utf-8">
       {% csrf_token %}
         <div class="col-12">
             <fieldset>
@@ -40,34 +40,48 @@
 
   $('#id_company').select2({ width: '100%' });
 
-  $("#update_budget_form").on('submit', function(e){
-    e.preventDefault();
-    data = $('form').serialize()
-    $.ajax({
-      type:"POST",
-      url: "{% url 'add_budget' %}",
-      data:data,
-      success: function (xhr, ajaxOptions, thrownError) {
-        if (xhr.pk){
-            Swal.fire(
-          'Actualizado',
-          'En un momento aparecerá tu PDF',
-          'success'
-          ) 
-          
-          $("p").append(" <b>Appended text</b>.");
-          $("p").append(" <b>Appended text</b>.");
-        }
-      },      
-      error: function (xhr, ajaxOptions, thrownError) {
-        
-      }
-      
-    })
-      
-    })
     
+    $("#update_company_form").on('submit', function(e){
+      e.preventDefault();
+      data = $('form').serialize()
+      $.ajax({
+        type:"POST",
+        url: "{% url 'update_companies' object.pk  %}",
+        data:data,
+        success: function (xhr, ajaxOptions, thrownError) {
+          console.log(xhr)
+          if (xhr.pk){
+              Swal.fire(
+            '¡Guardado',
+            'success',
+            'Se ha actualiado la compañia.'
+              ) 
+              .then(function (result) {
+                console.log(result)
+                if (result.isConfirmed) {
+                    window.location = "{% url 'companies' %}";
+                }
+            })
+  
+            
+            
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: '¡Intentelo más tarde!'
+            })
+          }
+        },      
+        error: function (xhr, ajaxOptions, thrownError) {
+          
+        }
 
+        })
+
+      })
+
+    
 
 </script>
 {% endblock %}

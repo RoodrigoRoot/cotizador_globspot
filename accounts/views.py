@@ -66,6 +66,17 @@ class CompanyUpdateView(UpdateView, LoginRequiredMixin):
     success_url = reverse_lazy('companies')
     form_class = CompanyModelForm
 
+    #def dispatch(self, request, *args, **kwargs):
+        #return self.object = self.get_object()
+
+    def post(self, request, *args, **kwargs):
+        json3 = {}
+        self.object = self.get_object()
+        form = CompanyModelForm(request.POST, instance=self.object)
+        if form.is_valid():
+            company = form.save()
+            json3 = {"pk":company.id}
+        return JsonResponse(json3, safe=False)
 
 
 class CompanyDeleteView(DeleteView, LoginRequiredMixin):
