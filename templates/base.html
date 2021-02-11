@@ -16,7 +16,7 @@
 {% block style %} 
 {% endblock %}
 
-<body class="hold-transition layout-top-nav">
+<body class="hold-transition layout-top-nav {% block body %} {% endblock %}">
     <div class="wrapper">
 {% if request.user.is_authenticated %}
     {% include "navbar.html" %}

@@ -1,40 +1,66 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Entrar{% endblock %}
+{% block title %}Globspot | Entrar{% endblock %}
 
 {% block css %} 
-    
+      <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'lib/adminlte-3.0.4/css/adminlte.min.css' %}">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 {% endblock %}
 
 {% block style %}
-    <style>
-        body{
-            background-image: url("{% static 'img/login/entrar.jpg' %}");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            color: #fff;
-            
-
-        }
-        form{
-            height: 450px;
-            display: flex;
-            flex-direction:column;
-            justify-content: center;
-            align-items: center;
-        }
-    </style>
 {% endblock %}
-
+{% block body %} 
+login-page
+{% endblock %}
 {% block content%}
-<div class="container-fluid text-center">
-<h2>¡Bienvenido!</h2>
+<div class="login-box">
+  <div class="login-logo">
+    <h1 class="text-primary">Globspot Cotizador</h1>
+  </div>
+  <!-- /.login-logo -->
+  <div class="card d-flex h-100">
+    <div class="card-body login-card-body justify-content-center align-self-center">
+      <p class="login-box-msg">Iniciar Sesión</p>
+
+      <form action="{% url 'login' %}" method="post" class="text-center">
+        {% csrf_token %}
+        <div class="row">
+        <div class="form-group col-12">
+            <label for="{{form.username.id_for_label}}">{{form.username.label}}: </label>
+            {{form.username}}
+          </div>
+          <div class="form-group col-12">
+            <label for="{{form.password.id_for_label}}">{{form.password.label}}: </label>
+            {{form.password}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-primary btn-block">Entrar</button>
+          </div>
+          <!-- /.col -->
+        </div>
+      </form>
+    </div>
+    <!-- /.login-card-body -->
+  </div>
 </div>
-<form method="POST" class="text-center">{% csrf_token %}
-{{form.as_p}}
-<input class="btn btn-success" type="submit" value="Entrar">
-</form>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{% static 'lib/adminlte-3.0.4/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'lib/adminlte-3.0.4/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'lib/adminlte-3.0.4/js/adminlte.min.js' %}"></script>
 
 {% endblock %}

@@ -30,8 +30,8 @@ class Budget(models.Model):
 class Prices(models.Model):
 
     name = models.CharField(verbose_name="Rango", max_length=50)
-    price = models.SmallIntegerField()
-    value = models.SmallIntegerField()
+    price = models.SmallIntegerField(default=0)
+    value = models.SmallIntegerField(default=0)
 
     def __str__(self):
         return self.name
