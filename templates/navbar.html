@@ -39,7 +39,8 @@
 
     <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
       <!-- Messages Dropdown Menu -->
-      <li class="nav-item dropdown">
+      <li class="nav-item dropdown d-flex align-items-center">
+        <p class="mr-3 mt-3">Bienvenido: <b>{{request.user.first_name}} {{request.user.last_name}} </b></p>
         <a href="{% url 'logout' %}" class="btn btn-outline-danger" type="submit">Salir</a>
 
       </li>

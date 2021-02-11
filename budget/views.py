@@ -5,8 +5,9 @@ from .models import Budget
 from .forms import BudgetModelForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.http import JsonResponse
-from .utils import get_quantity
+from django.http import JsonResponse, HttpResponse, FileResponse
+from .utils import get_quantity, PDFHelper
+from django.conf import settings
 
 #Create your views here.
 
@@ -67,6 +68,10 @@ class BudgetUpdateView(UpdateView, LoginRequiredMixin):
     form_class = BudgetModelForm
 
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         quantity = 0
         json3 = {}
@@ -104,4 +109,22 @@ class BudgetDeleteView(DeleteView, LoginRequiredMixin):
     model = Budget
     template_name = 'budget/delete_budget.html'
     success_url = reverse_lazy('index')
-    
+
+
+class PDFDowloadView(View, LoginRequiredMixin):
+
+    def get(self, request, *args, **kwargs):
+        try:
+            budget = Budget.objects.get(id=self.kwargs.get("pk"))
+            PDFHelper.create_pdf_budget(budget)
+            file = open(str(settings.BASE_DIR)+"/budget/MergedFiles.pdf", 'rb')
+            #response = HttpResponse("file", content_type='application/force-download', charset="utf-8")
+            #response['Content-Disposition'] = 'attachment; filename="{}"'.format(uni_filename)
+            response = FileResponse(file)
+            return response
+        except  Exception as e:
+            print(e)
+
+
+
+

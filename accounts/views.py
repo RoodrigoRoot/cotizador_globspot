@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from .models import Company
-from .forms import  CompanyModelForm
+from .forms import  CompanyModelForm, LoguinForm
 from django.http import JsonResponse
 # Create your views here.
 
@@ -16,11 +16,11 @@ class LoginView(View):
         if request.user.is_authenticated:
             return redirect(reverse("index"))
 
-        form = AuthenticationForm()
+        form = LoguinForm()
         return render(request, 'login.html', locals())
     
     def post(self, request, *args, **kwargs):
-        form = AuthenticationForm(data=request.POST)
+        form = LoguinForm(data=request.POST)
         
         if form.is_valid(): 
             username = form.cleaned_data['username']

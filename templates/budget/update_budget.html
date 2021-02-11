@@ -79,14 +79,17 @@
     data = $('form').serialize()
     $.ajax({
       type:"POST",
-      url: "{% url 'add_budget'  %}",
+      url: "{% url 'update_budget' object.pk %}",
       data:data,
       success: function (xhr, ajaxOptions, thrownError) {
         if (xhr.pk){
-            Swal.fire(
-          'Actualizado',
-          'En un momento aparecerá tu PDF',
-          'success'
+            Swal.fire({
+              title: "¡Actualizado!",
+              html: "<a href={% url 'dowload_budget' object.pk %} target=_blank> Ver Cotización</a>",
+              icon: "success",
+              buttons: true,
+              dangerMode: true,
+             }
           )
           .then(function (result) {
             console.log(result)

@@ -82,15 +82,18 @@
       url: "{% url 'add_budget' %}",
       data:data,
       success: function (xhr, ajaxOptions, thrownError) {
-        console.log(xhr)
         if (xhr.pk){
-            Swal.fire(
-          '¡Guardado',
-          'success',
-          'Se ha creado la cotización.'
-          ) 
+          url_dowload = "budget/dowload/"+xhr.pk+"/"
+          myhtml = `<a href="${url_dowload}" >Prueba</a>`,
+          Swal.fire({
+            html: `<h1>¡Guardada!</h1>
+            <p>Cotización Guardada.</p>
+            <br>
+            <a href=/budget/dowload/${xhr.pk}/ target="_blank">Ver cotización</a>
+            `,
+            icon: "success",
+          })
             .then(function (result) {
-              console.log(result)
               if (result.isConfirmed) {
                   window.location = "{% url 'index' %}";
               }

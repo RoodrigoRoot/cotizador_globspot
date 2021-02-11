@@ -3,7 +3,7 @@ from django import forms
 #from accounts.models import Company
 
 class BudgetModelForm(forms.ModelForm):
-    #company = forms.ModelChoiceField(Company.objects.all(), empty_label=None, label="Compañia")
+    
     company_contact = forms.CharField(required=True, label="Contacto", widget=forms.TextInput(
             attrs={'class': 'form-control',
             }
