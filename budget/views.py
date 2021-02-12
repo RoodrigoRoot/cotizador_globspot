@@ -116,8 +116,11 @@ class PDFDowloadView(View, LoginRequiredMixin):
     def get(self, request, *args, **kwargs):
         try:
             budget = Budget.objects.get(id=self.kwargs.get("pk"))
+            print(budget)
             PDFHelper.create_pdf_budget(budget)
-            file = open(str(settings.BASE_DIR)+"/budget/MergedFiles.pdf", 'rb')
+            file = open(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf", 'rb')
+            #import os
+            #os.remove(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf")
             #response = HttpResponse("file", content_type='application/force-download', charset="utf-8")
             #response['Content-Disposition'] = 'attachment; filename="{}"'.format(uni_filename)
             response = FileResponse(file)

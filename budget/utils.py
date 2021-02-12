@@ -34,7 +34,6 @@ def get_quantity(quantity):
 
 class PDFHelper:
 
-
     @classmethod
     def create_pdf_budget(cls, budget):
         
@@ -45,11 +44,23 @@ class PDFHelper:
             can = canvas.Canvas(packet, pagesize=letter)
             can.setFillColor(HexColor("#39CCEE"))
             can.setFont('Helvetica-Bold', 18)
-            can.drawString(580, 180, "{}".format(budget.company))
-            can.setFont('Helvetica-Bold', 14)
-            can.drawString(560, 100, "Asesor: {}".format(budget.creator))
+            can.drawString(585, 180, "{}".format(budget.company))
+            can.setFont('Helvetica-Bold', 12)
+            can.drawString(560, 140, "{}".format(budget.company_contact))
+            can.setFont('Helvetica-Bold', 12)
+            can.drawString(600, 100, "Asesor:")
+            can.drawString(580, 80, "{} {}".format(budget.creator.first_name, 
+            budget.creator.last_name
+            ))
             can.setFont('Helvetica-Bold', 10)
-            can.drawString(600, 40, "{}".format(budget.created_at.month))
+            months = {1:"Enero", 2: "Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo"
+            , 6:"Junio", 7:"Julio", 8:"Agosto", 9:"Septiembre", 10:"Octubre",
+            11:"Noviembre", 12:"Diciembre"
+            }
+            
+            can.drawString(590, 40, "{} {}".format(months[budget.created_at.month], 
+            budget.created_at.year
+            ))
             can.save()
 
                 #move to the beginning of the StringIO buffer

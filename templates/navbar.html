@@ -23,6 +23,7 @@
         <li class="nav-item">
           <a href="{% url 'companies' %}" class="nav-link">Compañias</a>
         </li>
+        {% if request.user.is_staff %}
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Mi cuenta</a>
           <ul aria-labelledby="dropdownSubMenu1" class="dropdown-menu border-0 shadow">
@@ -33,6 +34,7 @@
 
           </ul>
         </li>
+        {% endif %}
       </ul>
 
     </div>
