@@ -23,6 +23,9 @@
         <li class="nav-item">
           <a href="{% url 'companies' %}" class="nav-link">Compañias</a>
         </li>
+        <li class="nav-item">
+          <a href="{% url 'prices_list' %}" class="nav-link">Precios</a>
+        </li>
         {% if request.user.is_staff %}
         <li class="nav-item dropdown">
           <a id="dropdownSubMenu1" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link dropdown-toggle">Mi cuenta</a>

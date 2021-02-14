@@ -1,28 +1,28 @@
 {% extends 'base.html' %}
-{% block title %}Globspot | Actualizar Compañía{% endblock %}
+{% block title %}Globspot | Actualizar Precio{% endblock %}
 
 
   {% block content %} 
   <div class="container">
-    <form id="update_company_form" method="post" action="{% url 'update_companies' object.pk %}" accept-charset="utf-8">
+    <form id="update_price_form" method="post" action="{% url 'update_companies' object.pk %}" accept-charset="utf-8">
       {% csrf_token %}
         <div class="col-12">
             <fieldset>
-                <legend>Cliente</legend>
+                <legend>Precio</legend>
                 
                 <div class="form-group col-12">
                   <label for="{{form.name.id_for_label}}">{{form.name.label}}: </label>
                   {{form.name}}
                 </div>
                 <div class="form-group col-12">
-                  <label for="{{form.description.id_for_label}}">{{form.description.label}}: </label>
-                  {{form.description}}
+                  <label for="{{form.description.id_for_label}}">{{form.price.label}}: </label>
+                  {{form.price}}
                 </div>
               </fieldset>
         </div>
         <div class="modal-footer">
             <input type="submit" value="Guardar" class="btn btn-success">
-            <a href="{% url 'companies' %}" class="btn btn-danger" >Cancelar</a>
+            <a href="{% url 'prices_list' %}" class="btn btn-danger" >Cancelar</a>
 
         </div>
     </form>
@@ -41,12 +41,12 @@
   $('#id_company').select2({ width: '100%' });
 
     
-    $("#update_company_form").on('submit', function(e){
+    $("#update_price_form").on('submit', function(e){
       e.preventDefault();
       data = $('form').serialize()
       $.ajax({
         type:"POST",
-        url: "{% url 'update_companies' object.pk  %}",
+        url: "{% url 'update_price' object.pk  %}",
         data:data,
         success: function (xhr, ajaxOptions, thrownError) {
           console.log(xhr)
@@ -54,12 +54,12 @@
               Swal.fire(
             '¡Guardado',
             
-            'Se ha actualiado la compañia.'
+            'Se ha actualiado el precio.'
               ) 
               .then(function (result) {
                 console.log(result)
                 if (result.isConfirmed) {
-                    window.location = "{% url 'companies' %}";
+                    window.location = "{% url 'prices_list' %}";
                 }
             })
   

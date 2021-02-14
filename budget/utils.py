@@ -43,13 +43,13 @@ class PDFHelper:
             # create a new PDF with Reportlab
             can = canvas.Canvas(packet, pagesize=letter)
             can.setFillColor(HexColor("#39CCEE"))
-            can.setFont('Helvetica-Bold', 18)
-            can.drawString(585, 180, "{}".format(budget.company))
+            can.setFont('Helvetica-Bold', 16)
+            can.drawString(555, 140, "{}".format(budget.company))
             can.setFont('Helvetica-Bold', 12)
-            can.drawString(560, 140, "{}".format(budget.company_contact))
+            can.drawString(585, 110, "{}".format(budget.company_contact))
             can.setFont('Helvetica-Bold', 12)
-            can.drawString(600, 100, "Asesor:")
-            can.drawString(580, 80, "{} {}".format(budget.creator.first_name, 
+            can.drawString(600, 80, "Asesor:")
+            can.drawString(580, 60, "{} {}".format(budget.creator.first_name, 
             budget.creator.last_name
             ))
             can.setFont('Helvetica-Bold', 10)
@@ -58,7 +58,7 @@ class PDFHelper:
             11:"Noviembre", 12:"Diciembre"
             }
             
-            can.drawString(590, 40, "{} {}".format(months[budget.created_at.month], 
+            can.drawString(590, 30, "{} {}".format(months[budget.created_at.month], 
             budget.created_at.year
             ))
             can.save()
@@ -120,10 +120,10 @@ class PDFHelper:
             can.setFont('Helvetica-Bold', 10)
             can.setFillColor(colors.white)
             can.drawString(400, 130, "Cantidad de dispositvos: {}".format(budget.quantity))
-            can.drawString(400, 120, "Precio unitario: ${}".format(budget.unit_cost))
+            can.drawString(400, 120, "Precio unitario: ${:,}".format(budget.unit_cost))
             can.setFont('Helvetica-Bold', 12)
             can.setFillColor(colors.black)
-            can.drawString(400, 88, "Total: ${} MXN".format(budget.total))
+            can.drawString(400, 88, "Total: ${:,} MXN".format(budget.total))
 
             can.save()
 
@@ -141,6 +141,35 @@ class PDFHelper:
             outputStream = open(str(settings.BASE_DIR)+"/budget/costo_.pdf", "wb")
             output.write(outputStream)
             outputStream.close()
+
+
+        def sincerely(budget):
+            packet = io.BytesIO()
+            # create a new PDF with Reportlab
+            can = canvas.Canvas(packet, pagesize=letter)
+            can.setFillColor(HexColor("#40ABE6"))
+            can.setFont('Helvetica-Bold', 18)
+            can.drawString(290, 250, "Adrián Parilla")
+            can.drawString(250, 230, "Director de Operaciones")
+            can.save()
+
+                #move to the beginning of the StringIO buffer
+            packet.seek(0)
+            new_pdf = PdfFileReader(packet)
+            # read your existing PDF
+            existing_pdf = PdfFileReader(open(str(settings.BASE_DIR)+"/budget/atte.pdf", "rb"))
+            output = PdfFileWriter()
+            # add the "watermark" (which is the new pdf) on the existing page
+            page = existing_pdf.getPage(0)
+            page.mergePage(new_pdf.getPage(0))
+            output.addPage(page)
+            # finally, write "output" to a real file
+            outputStream = open(str(settings.BASE_DIR)+"/budget/atte_.pdf", "wb")
+            output.write(outputStream)
+            outputStream.close()
+
+
+
 
         def merge_template(budget):
             
@@ -176,8 +205,9 @@ class PDFHelper:
             pdf2File.close()
 
 
-        def merge_last_pdf(budget):
-        
+
+
+        def merge_penultimate_pdf(budget):
         
             # Open the files that have to be merged one by one
             pdf2File = open(str(settings.BASE_DIR)+"/budget/condiciones.pdf", 'rb')
@@ -210,22 +240,56 @@ class PDFHelper:
             pdf2File.close()
 
 
+        def merge_last_pdf(budget):
+            
+            # Open the files that have to be merged one by one
+            pdf2File = open(str(settings.BASE_DIR)+"/budget/atte_.pdf", 'rb')
+            pdf1File = open(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf", 'rb')
+            
+            # Read the files that you have opened
+            pdf1Reader = PyPDF2.PdfFileReader(pdf1File)
+            pdf2Reader = PyPDF2.PdfFileReader(pdf2File)
+            
+            # Create a new PdfFileWriter object which represents a blank PDF document
+            pdfWriter = PyPDF2.PdfFileWriter()
+            
+            # Loop through all the pagenumbers for the first document
+            for pageNum in range(pdf1Reader.numPages):
+                pageObj = pdf1Reader.getPage(pageNum)
+                pdfWriter.addPage(pageObj)
+            
+            # Loop through all the pagenumbers for the second document
+            for pageNum in range(pdf2Reader.numPages):
+                pageObj = pdf2Reader.getPage(pageNum)
+                pdfWriter.addPage(pageObj)
+            
+            # Now that you have copied all the pages in both the documents, write them into the a new document
+            pdfOutputFile = open(str(settings.BASE_DIR)+"/budget/Cotizacion_.pdf", 'wb')
+            pdfWriter.write(pdfOutputFile)
+            
+            # Close all the files - Created as well as opened
+            pdfOutputFile.close()
+            pdf1File.close()
+            pdf2File.close()
+
+
+
+
         def delete_files(budget):
             import os
             os.remove(str(settings.BASE_DIR)+"/budget/template_1.pdf")
             os.remove(str(settings.BASE_DIR)+"/budget/template_.pdf")
             os.remove(str(settings.BASE_DIR)+"/budget/costo_.pdf")
             os.remove(str(settings.BASE_DIR)+"/budget/portada_.pdf")
+            os.remove(str(settings.BASE_DIR)+"/budget/atte_.pdf")
         
+
         first_page(budget)
         merge_first_pdf(budget)
         costs(budget)
         merge_template(budget)
+        sincerely(budget)
+        merge_penultimate_pdf(budget)
         merge_last_pdf(budget)
         delete_files(budget)
 
-        
-from budget.models import Budget
-from budget.utils import PDFHelper
-budget = Budget.objects.last()
-PDFHelper.create_pdf_budget(budget)

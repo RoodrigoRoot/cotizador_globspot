@@ -1,4 +1,4 @@
-from .models import Budget
+from .models import Budget, Prices
 from django import forms
 #from accounts.models import Company
 
@@ -42,3 +42,9 @@ class BudgetModelForm(forms.ModelForm):
         model = Budget
         fields = ("company", "company_contact", "vehicles", "containers", "motorcycles", "trucks", "people", "pets")
 
+
+class PricesModelForm(forms.ModelForm):
+
+    class Meta:
+        model = Prices
+        fields = ("name", "price")

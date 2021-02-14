@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 {% block title %}Globspot | Cotizador{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'lib/datatables-1.10.20/css/dataTables.bootstrap4.min.css' %}"/>
@@ -26,7 +27,7 @@
         <thead>
           <tr>
             <th scope="col">Compañia</th>
-            <th scope="col">Contacto</th>
+            <th scope="col">Encargado</th>
             <th scope="col">Precio por Unidad</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Total</th>
@@ -39,9 +40,9 @@
           <tr>
             <td>{{budget.company}}</td>
             <td>{{budget.company_contact}}</td>
-            <td>{{budget.unit_cost}}</td>
+            <td>{{budget.unit_cost|intcomma}}</td>
             <td>{{budget.quantity}}</td>
-            <td>{{budget.total}}</td>
+            <td>{{budget.total|intcomma}}</td>
             <td>{{budget.created_at}}</td>
             <td class="text-center">
                 <a href="{% url 'dowload_budget' budget.pk %}" target="_blank" data-bs-toggle="Descargar" data-bs-placement="top" title="Descargar"><i class="fas fa-cloud-download-alt"></i></a>
