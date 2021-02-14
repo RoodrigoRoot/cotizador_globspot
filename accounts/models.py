@@ -6,6 +6,7 @@ class Company(models.Model):
 
     name = models.CharField(verbose_name="Compañia", max_length=150)
     description = models.TextField(verbose_name="Descripción", blank=True, null=True)
+    executive = models.CharField(verbose_name="Ejecutivo", max_length=150)
 
     def __str__(self):
         return self.name

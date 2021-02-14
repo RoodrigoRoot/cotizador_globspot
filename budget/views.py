@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect,reverse
 from django.views import View
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import Budget 
-from .forms import BudgetModelForm
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .models import Budget, Prices
+from .forms import BudgetModelForm, PricesModelForm
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponse, FileResponse
 from .utils import get_quantity, PDFHelper
 from django.conf import settings
-
+from django.views.generic.list import ListView
 #Create your views here.
 
 class IndexView(LoginRequiredMixin, View):
@@ -41,7 +41,6 @@ class BudgetCreateView(CreateView, LoginRequiredMixin):
             quantity += int(request.POST.get("containers"))
             quantity += int(request.POST.get("motorcycles"))
             price, total = get_quantity(quantity)
-
             budget = Budget.objects.create(
                 company=form.cleaned_data['company'],
                 company_contact=form.cleaned_data["company_contact"],
@@ -116,9 +115,9 @@ class PDFDowloadView(View, LoginRequiredMixin):
     def get(self, request, *args, **kwargs):
         try:
             budget = Budget.objects.get(id=self.kwargs.get("pk"))
-            print(budget)
             PDFHelper.create_pdf_budget(budget)
-            file = open(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf", 'rb')
+            file = open(str(settings.BASE_DIR)+"/budget/Cotizacion_.pdf", 'rb')
+            print(file)
             #import os
             #os.remove(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf")
             #response = HttpResponse("file", content_type='application/force-download', charset="utf-8")
@@ -129,5 +128,19 @@ class PDFDowloadView(View, LoginRequiredMixin):
             print(e)
 
 
+class PricesListView(ListView, LoginRequiredMixin):
+    model = Prices
 
 
+class PricesDeleteView(DeleteView, LoginRequiredMixin):
+    model = Prices
+    template_name = 'budget/delete_price.html'
+    success_url = reverse_lazy('prices_list')
+    form_class = PricesModelForm
+
+
+class PricesUpdateView(UpdateView, LoginRequiredMixin):
+    model = Prices
+    template_name = 'budget/update_price.html'
+    success_url = reverse_lazy('prices_list')
+    form_class = PricesModelForm
