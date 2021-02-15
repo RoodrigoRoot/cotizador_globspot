@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.auth.models import User
 from accounts.models import Company
 # Create your models here.
 
@@ -12,7 +11,7 @@ class Budget(models.Model):
     containers = models.IntegerField(verbose_name="Camiones", null=True, blank=True, default=0)
     motorcycles = models.IntegerField(verbose_name="Camiones", null=True, blank=True, default=0)
     pets = models.IntegerField(verbose_name="Mascotas", null=True, blank=True, default=0)
-    creator = models.ForeignKey(User, verbose_name="Autor", on_delete=models.CASCADE)
+    creator = models.ForeignKey("accounts.Profile", verbose_name="Autor", on_delete=models.CASCADE)
     quantity = models.SmallIntegerField(default=0)
     unit_cost = models.SmallIntegerField(default=0)
     total = models.IntegerField(verbose_name="Total", default=0)

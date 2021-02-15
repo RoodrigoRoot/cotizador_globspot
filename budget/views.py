@@ -50,7 +50,7 @@ class BudgetCreateView(CreateView, LoginRequiredMixin):
                 people=form.cleaned_data["people"],
                 containers=form.cleaned_data["containers"],
                 motorcycles=form.cleaned_data["motorcycles"],
-                creator=request.user,
+                creator=request.user.profile,
                 quantity=quantity,
                 unit_cost=price,
                 total=total
@@ -91,7 +91,7 @@ class BudgetUpdateView(UpdateView, LoginRequiredMixin):
 
                 budget_upd.quantity=quantity
                 budget_upd.unit_cost=price
-                budget_upd.creator=request.user
+                budget_upd.creator=request.user.profile
                 budget_upd.total=total
 
                 budget_upd.save()
@@ -117,11 +117,6 @@ class PDFDowloadView(View, LoginRequiredMixin):
             budget = Budget.objects.get(id=self.kwargs.get("pk"))
             PDFHelper.create_pdf_budget(budget)
             file = open(str(settings.BASE_DIR)+"/budget/Cotizacion_.pdf", 'rb')
-            print(file)
-            #import os
-            #os.remove(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf")
-            #response = HttpResponse("file", content_type='application/force-download', charset="utf-8")
-            #response['Content-Disposition'] = 'attachment; filename="{}"'.format(uni_filename)
             response = FileResponse(file)
             return response
         except  Exception as e:
