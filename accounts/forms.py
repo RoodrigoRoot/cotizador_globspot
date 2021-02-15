@@ -7,7 +7,12 @@ class CompanyModelForm(forms.ModelForm):
         'class':'form-control'
     }))
 
-    
+    executive = forms.CharField(label="Cliente", widget=forms.TextInput(attrs={
+        'class':'form-control'
+    }))
+
+
+
     description =  forms.CharField(label="Descripcíon", required=False, widget=forms.Textarea(attrs={
         'class':'form-control',
         'rows':3
