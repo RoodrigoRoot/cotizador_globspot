@@ -44,13 +44,18 @@ class PDFHelper:
             can = canvas.Canvas(packet, pagesize=letter)
             can.setFillColor(HexColor("#39CCEE"))
             can.setFont('Helvetica-Bold', 16)
-            can.drawString(555, 140, "{}".format(budget.company))
+            len_company = len(str(budget.company).split())
+            if len_company >= 2:
+                can.drawString(555, 140, "{}".format(budget.company))
+            else:
+                can.drawString(590, 140, "{}".format(budget.company))
+
             can.setFont('Helvetica-Bold', 12)
             can.drawString(585, 110, "{}".format(budget.company_contact))
             can.setFont('Helvetica-Bold', 12)
             can.drawString(600, 80, "Asesor:")
-            can.drawString(580, 60, "{} {}".format(budget.creator.first_name, 
-            budget.creator.last_name
+            can.drawString(580, 60, "{} {}".format(budget.creator.user.first_name, 
+            budget.creator.user.last_name
             ))
             can.setFont('Helvetica-Bold', 10)
             months = {1:"Enero", 2: "Febrero", 3:"Marzo", 4:"Abril", 5:"Mayo"
@@ -149,8 +154,10 @@ class PDFHelper:
             can = canvas.Canvas(packet, pagesize=letter)
             can.setFillColor(HexColor("#40ABE6"))
             can.setFont('Helvetica-Bold', 18)
-            can.drawString(290, 250, "Adrián Parilla")
-            can.drawString(250, 230, "Director de Operaciones")
+            can.drawString(290, 250, "{} {}".format(budget.creator.user.first_name, 
+            budget.creator.user.last_name
+            ))
+            can.drawString(250, 230, budget.creator.charge)
             can.save()
 
                 #move to the beginning of the StringIO buffer
