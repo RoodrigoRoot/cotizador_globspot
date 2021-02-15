@@ -74,6 +74,19 @@
 
   $('#id_company').select2({ width: '100%' });
 
+  $("#id_company").on("change", function(e){
+    console.log("Cambio")
+    id_comp = $("#id_company").val()
+    $.ajax({
+      type:"GET",
+      url :"{% url 'get_contact_company' %}?comp_id="+id_comp,
+      success: function(xhr, ajaxOptions, thrownError){
+        $("#id_company_contact").val(xhr.executive)
+      }
+    })
+  }
+    )
+  
   $("#budget_form").on('submit', function(e){
     e.preventDefault();
     data = $('form').serialize()

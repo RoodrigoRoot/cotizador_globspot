@@ -52,9 +52,9 @@ class CompanyCreateView(CreateView, LoginRequiredMixin):
         if form.is_valid():
             company = Company.objects.create(
                 name=form.cleaned_data["name"],
+                executive=form.cleaned_data["executive"],
                 description=form.cleaned_data["description"]
             )
-            print(company)
             if company:    
                 json3 = {'pk': company.pk}
 
@@ -66,16 +66,17 @@ class CompanyUpdateView(UpdateView, LoginRequiredMixin):
     success_url = reverse_lazy('companies')
     form_class = CompanyModelForm
 
-    #def dispatch(self, request, *args, **kwargs):
-        #return self.object = self.get_object()
-
     def post(self, request, *args, **kwargs):
         json3 = {}
+        comp = Company.objects.get(id=self.kwargs["pk"])
         self.object = self.get_object()
         form = CompanyModelForm(request.POST, instance=self.object)
         if form.is_valid():
-            company = form.save()
-            json3 = {"pk":company.id}
+            comp.name = form.cleaned_data["name"]
+            comp.description = form.cleaned_data["description"]
+            comp.executive = form.cleaned_data["executive"]
+            comp.save()
+            json3 = {"pk":comp.id}
         return JsonResponse(json3, safe=False)
 
 
@@ -83,3 +84,12 @@ class CompanyDeleteView(DeleteView, LoginRequiredMixin):
     model = Company
     template_name = 'accounts/delete_company.html'
     success_url = reverse_lazy('companies')
+
+
+def get_company_contact(request):
+
+    executive = Company.objects.get(id=int(request.GET["comp_id"])).executive
+    json3 = {'executive': executive}
+
+    return JsonResponse(json3)
+

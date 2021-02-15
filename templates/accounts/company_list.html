@@ -18,6 +18,7 @@
             <thead>
               <tr>
                 <th scope="col">Compañía</th>
+                <th scope="col">Cliente</th>
                 <th scope="col">Descripción</th>
                 <th scope="col">Acciones</th>
               </tr>
@@ -26,6 +27,7 @@
                 {% for company in object_list %}
               <tr>
                 <td>{{company.name}}</td>
+                <td>{{company.executive}}</td>
                 <td>{{company.description}}</td>
                 <td class="text-center">
                     <a href="{% url 'update_companies' company.pk %}"  data-toggle="tooltip" data-bs-placement="top" title="Actualizar"><i class="fas fa-pen" style="color:#F0AD4E;"></i></a>
