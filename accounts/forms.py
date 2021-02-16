@@ -7,7 +7,7 @@ class CompanyModelForm(forms.ModelForm):
         'class':'form-control'
     }))
 
-    executive = forms.CharField(label="Cliente", widget=forms.TextInput(attrs={
+    executive = forms.CharField(label="Contacto", widget=forms.TextInput(attrs={
         'class':'form-control'
     }))
 

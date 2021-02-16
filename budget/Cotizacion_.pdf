@@ -23,14 +23,14 @@ endobj
 /Font <<
 /F1 23 0 R
 /F2 27 0 R
-/F10c0430c8-cfbe-4bfe-ac6a-48fbd2b23bcc <<
+/F196f2e9ee-3487-4c02-9747-bdce48bbc2df <<
 /BaseFont /Helvetica
 /Encoding /WinAnsiEncoding
 /Name /F1
 /Subtype /Type1
 /Type /Font
 >>
-/F2cab90ae5-cb1c-4bf2-8555-1b22d1bc0137 <<
+/F2ca6dc8fd-246d-4186-9442-aeefa3d839af <<
 /BaseFont /Helvetica-Bold
 /Encoding /WinAnsiEncoding
 /Name /F2
@@ -42,7 +42,7 @@ endobj
 /Image6 31 0 R
 /Image12 32 0 R
 >>
-/ProcSet [ /ImageC /Text /ImageI /PDF /ImageB ]
+/ProcSet [ /ImageI /ImageC /PDF /Text /ImageB ]
 >>
 /Contents 34 0 R
 /Group <<
@@ -460,7 +460,7 @@ endobj
 /XObject <<
 /Image32 171 0 R
 >>
-/ProcSet [ /ImageC /Text /ImageI /PDF /ImageB ]
+/ProcSet [ /ImageI /ImageC /PDF /Text /ImageB ]
 >>
 /Contents 173 0 R
 /Group <<
@@ -553,7 +553,7 @@ endobj
 /F1 224 0 R
 /F2 225 0 R
 >>
-/ProcSet [ /ImageC /Text /ImageI /PDF /ImageB ]
+/ProcSet [ /ImageI /ImageC /PDF /Text /ImageB ]
 >>
 /Contents 226 0 R
 /Group <<
@@ -2654,30 +2654,30 @@ Q
 q
 1 0 0 1 0 0 cm
 BT
-/F10c0430c8-cfbe-4bfe-ac6a-48fbd2b23bcc 12 Tf
+/F196f2e9ee-3487-4c02-9747-bdce48bbc2df 12 Tf
 14.4 TL
 ET
 0.22353 0.8 0.93333 rg
 BT
-/F2cab90ae5-cb1c-4bf2-8555-1b22d1bc0137 16 Tf
+/F2ca6dc8fd-246d-4186-9442-aeefa3d839af 16 Tf
 19.2 TL
 ET
 BT
 1 0 0 1 555 140 Tm
-(Globspot\040México) Tj
+(Avicola\040Quiñones) Tj
 T*
 ET
 BT
-/F2cab90ae5-cb1c-4bf2-8555-1b22d1bc0137 12 Tf
+/F2ca6dc8fd-246d-4186-9442-aeefa3d839af 12 Tf
 14.4 TL
 ET
 BT
 1 0 0 1 585 110 Tm
-(Adrián\040Parrilla) Tj
+(Aurelio\040Vargas) Tj
 T*
 ET
 BT
-/F2cab90ae5-cb1c-4bf2-8555-1b22d1bc0137 12 Tf
+/F2ca6dc8fd-246d-4186-9442-aeefa3d839af 12 Tf
 14.4 TL
 ET
 BT
@@ -2687,11 +2687,11 @@ T*
 ET
 BT
 1 0 0 1 580 60 Tm
-(Rodrigo\040Urcino) Tj
+(Adrián\040Parilla) Tj
 T*
 ET
 BT
-/F2cab90ae5-cb1c-4bf2-8555-1b22d1bc0137 10 Tf
+/F2ca6dc8fd-246d-4186-9442-aeefa3d839af 10 Tf
 12 TL
 ET
 BT
@@ -7458,12 +7458,12 @@ ET
 1 1 1 rg
 BT
 1 0 0 1 400 130 Tm
-(Cantidad\040de\040dispositvos\072\0404) Tj
+(Cantidad\040de\040dispositvos\072\0405) Tj
 T*
 ET
 BT
 1 0 0 1 400 120 Tm
-(Precio\040unitario\072\040\0443\054500) Tj
+(Precio\040unitario\072\040\0443\054499) Tj
 T*
 ET
 BT
@@ -7473,7 +7473,7 @@ ET
 0 0 0 rg
 BT
 1 0 0 1 400 88 Tm
-(Total\072\040\04414\054000\040MXN) Tj
+(Total\072\040\04417\054495\040MXN) Tj
 T*
 ET
 Q
@@ -8518,7 +8518,7 @@ endobj
 endobj
 226 0 obj
 <<
-/Length 1213
+/Length 1211
 >>
 stream
 q
@@ -8600,12 +8600,12 @@ BT
 ET
 BT
 1 0 0 1 290 250 Tm
-(Rodrigo\040Urcino) Tj
+(Adrián\040Parilla) Tj
 T*
 ET
 BT
 1 0 0 1 250 230 Tm
-(Desarrollador\040de\040Software) Tj
+(Director\040de\040operaciones) Tj
 T*
 ET
 Q
@@ -8848,5 +8848,5 @@ trailer
 /Info 2 0 R
 >>
 startxref
-1312389
+1312387
 %%EOF
