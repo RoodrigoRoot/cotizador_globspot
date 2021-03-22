@@ -4,7 +4,7 @@
 
   {% block content %} 
   <div class="container">
-    <form id="update_price_form" method="post" action="{% url 'update_companies' object.pk %}" accept-charset="utf-8">
+    <form id="update_price_form" method="post" action="{% url 'update_price' object.pk %}" accept-charset="utf-8">
       {% csrf_token %}
         <div class="col-12">
             <fieldset>
@@ -52,9 +52,8 @@
           console.log(xhr)
           if (xhr.pk){
               Swal.fire(
-            '¡Guardado',
-            
-            'Se ha actualiado el precio.'
+            '¡Guardado!',
+            'Se ha actualizado el precio.'
               ) 
               .then(function (result) {
                 console.log(result)

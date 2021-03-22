@@ -139,3 +139,17 @@ class PricesUpdateView(UpdateView, LoginRequiredMixin):
     template_name = 'budget/update_price.html'
     success_url = reverse_lazy('prices_list')
     form_class = PricesModelForm
+
+    def post(self, request, *args, **kwargs):
+        print("entra")
+        json3 = {}
+        form = PricesModelForm(request.POST or None)
+        if form.is_valid():
+            print("valido")
+            price_upd = form.save(commit=False)
+            price = form.cleaned_data.get("price")
+            price_upd.price = price
+            price_upd.save()
+            print(price_upd.pk)
+            json3 = {"pk":price_upd.pk}
+        return JsonResponse(json3, safe=False)
