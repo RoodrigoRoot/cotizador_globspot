@@ -128,7 +128,8 @@ class PDFHelper:
             can.drawString(400, 120, "Precio unitario: ${:,}".format(budget.unit_cost))
             can.setFont('Helvetica-Bold', 12)
             can.setFillColor(colors.black)
-            can.drawString(400, 88, "Total: ${:,} MXN".format(budget.total))
+            total = round(budget.total * 1.16, 2)
+            can.drawString(395, 88, "Total: ${:,} MXN (IVA Incluido)".format(total))
 
             can.save()
 
@@ -157,7 +158,7 @@ class PDFHelper:
             can.drawString(290, 250, "{} {}".format(budget.creator.user.first_name, 
             budget.creator.user.last_name
             ))
-            can.drawString(250, 230, budget.creator.charge)
+            can.drawString(278, 215, budget.creator.charge)
             can.save()
 
                 #move to the beginning of the StringIO buffer
@@ -309,19 +310,7 @@ class PDFHelper:
             pdf1File.close()
             pdf2File.close()
 
-
-
-        def delete_files(budget):
-            import os
-            os.remove(str(settings.BASE_DIR)+"/budget/template_1.pdf")
-            os.remove(str(settings.BASE_DIR)+"/budget/template_.pdf")
-            os.remove(str(settings.BASE_DIR)+"/budget/costo_.pdf")
-            os.remove(str(settings.BASE_DIR)+"/budget/portada_.pdf")
-            os.remove(str(settings.BASE_DIR)+"/budget/atte_.pdf")
-            os.remove(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf")
-            os.remove(str(settings.BASE_DIR)+"/budget/template_1_1.pdf")
-        
-
+      
         first_page(budget)
         merge_first_pdf(budget)
         costs(budget)
@@ -330,5 +319,17 @@ class PDFHelper:
         add_credit_card()
         merge_penultimate_pdf(budget)
         merge_last_pdf(budget)
-        delete_files(budget)
+
+def delete_files(budget):
+    import os
+    os.remove(str(settings.BASE_DIR)+"/budget/template_1.pdf")
+    os.remove(str(settings.BASE_DIR)+"/budget/template_.pdf")
+    os.remove(str(settings.BASE_DIR)+"/budget/costo_.pdf")
+    os.remove(str(settings.BASE_DIR)+"/budget/portada_.pdf")
+    os.remove(str(settings.BASE_DIR)+"/budget/atte_.pdf")
+    os.remove(str(settings.BASE_DIR)+"/budget/Cotizacion.pdf")
+    os.remove(str(settings.BASE_DIR)+"/budget/template_1_1.pdf")
+    os.remove(str(settings.BASE_DIR)+"/budget/Cotizacion_.pdf")
+        
+
 

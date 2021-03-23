@@ -6,7 +6,7 @@ from .forms import BudgetModelForm, PricesModelForm
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.urls import reverse_lazy
 from django.http import JsonResponse, HttpResponse, FileResponse
-from .utils import get_quantity, PDFHelper
+from .utils import get_quantity, PDFHelper, delete_files
 from django.conf import settings
 from django.views.generic.list import ListView
 #Create your views here.
@@ -100,7 +100,6 @@ class BudgetUpdateView(UpdateView, LoginRequiredMixin):
 
         except  Exception as e:
             json3 = {"error":"KO"}
-            print(e)
         return JsonResponse(json3, safe=False)
 
 
@@ -118,6 +117,7 @@ class PDFDowloadView(View, LoginRequiredMixin):
             PDFHelper.create_pdf_budget(budget)
             file = open(str(settings.BASE_DIR)+"/budget/Cotizacion_.pdf", 'rb')
             response = FileResponse(file)
+            delete_files(budget)
             return response
         except  Exception as e:
             print(e)
@@ -141,15 +141,12 @@ class PricesUpdateView(UpdateView, LoginRequiredMixin):
     form_class = PricesModelForm
 
     def post(self, request, *args, **kwargs):
-        print("entra")
         json3 = {}
         form = PricesModelForm(request.POST or None)
         if form.is_valid():
-            print("valido")
             price_upd = form.save(commit=False)
             price = form.cleaned_data.get("price")
             price_upd.price = price
             price_upd.save()
-            print(price_upd.pk)
             json3 = {"pk":price_upd.pk}
         return JsonResponse(json3, safe=False)
