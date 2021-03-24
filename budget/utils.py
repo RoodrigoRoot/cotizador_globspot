@@ -137,7 +137,12 @@ class PDFHelper:
             packet.seek(0)
             new_pdf = PdfFileReader(packet)
             # read your existing PDF
+            existing_pdf = ""
             existing_pdf = PdfFileReader(open(str(settings.BASE_DIR)+"/budget/costo.pdf", "rb"))
+
+            if budget.foreing:
+                existing_pdf = PdfFileReader(open(str(settings.BASE_DIR)+"/budget/costo_foraneo.pdf", "rb"))
+                
             output = PdfFileWriter()
             # add the "watermark" (which is the new pdf) on the existing page
             page = existing_pdf.getPage(0)

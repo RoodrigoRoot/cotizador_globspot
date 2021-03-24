@@ -50,6 +50,7 @@ class BudgetCreateView(CreateView, LoginRequiredMixin):
                 people=form.cleaned_data["people"],
                 containers=form.cleaned_data["containers"],
                 motorcycles=form.cleaned_data["motorcycles"],
+                foreing=form.cleaned_data["foreing"],
                 creator=request.user.profile,
                 quantity=quantity,
                 unit_cost=price,

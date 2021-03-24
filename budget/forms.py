@@ -40,7 +40,7 @@ class BudgetModelForm(forms.ModelForm):
 
     class Meta:
         model = Budget
-        fields = ("company", "company_contact", "vehicles", "containers", "motorcycles", "trucks", "people", "pets")
+        fields = ("company", "company_contact", "vehicles", "containers", "motorcycles", "trucks", "people", "pets", "foreing")
 
 
 class PricesModelForm(forms.ModelForm):

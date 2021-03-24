@@ -17,7 +17,8 @@ class Budget(models.Model):
     total = models.IntegerField(verbose_name="Total", default=0)
     created_at = models.DateTimeField(verbose_name="Creación", auto_now=False, auto_now_add=True)
     updated_at = models.DateTimeField(verbose_name="Modificación", auto_now=True, auto_now_add=False)
-
+    foreing = models.BooleanField(verbose_name="Foraneo")
+    
     def __str__(self):
         return self.company_contact
     
